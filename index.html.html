@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portofolio - Zakariyya Perdana</title>
+    <style>
+        /* ================= FRUTIGER AERO GLOBAL STYLING ================= */
+        body { 
+            font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif; 
+            margin: 0; 
+            padding: 0; 
+            color: #042940; 
+            line-height: 1.6; 
+            scroll-behavior: smooth;
+            background: linear-gradient(180deg, #00b4db 0%, #0083b0 50%, #a8ff78 100%);
+            background-attachment: fixed;
+            overflow-x: hidden;
+        }
+
+        /* --- Efek Gelembung Animasi (Frutiger Aero Core) --- */
+        .bubbles-wrapper {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: -1;
+            pointer-events: none;
+        }
+        .bubble {
+            position: absolute;
+            bottom: -100px;
+            background: rgba(255, 255, 255, 0.15);
+            border: 2px solid rgba(255, 255, 255, 0.6);
+            box-shadow: inset 0 20px 30px rgba(255, 255, 255, 0.3), 
+                        inset 10px 10px 30px rgba(0, 180, 219, 0.3), 
+                        0 4px 15px rgba(0,0,0,0.1);
+            border-radius: 50%;
+            animation: floatUp 12s infinite linear;
+        }
+        .bubble::after {
+            content: '';
+            position: absolute;
+            top: 15%; left: 15%;
+            width: 25%; height: 25%;
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: 50%;
+        }
+        /* Variasi Ukuran & Posisi Gelembung */
+        .b1 { width: 80px; height: 80px; left: 10%; animation-duration: 10s; }
+        .b2 { width: 120px; height: 120px; left: 30%; animation-duration: 15s; animation-delay: 2s; }
+        .b3 { width: 50px; height: 50px; left: 55%; animation-duration: 8s; animation-delay: 4s; }
+        .b4 { width: 90px; height: 90px; left: 75%; animation-duration: 13s; animation-delay: 1s; }
+        .b5 { width: 110px; height: 110px; left: 85%; animation-duration: 11s; animation-delay: 5s; }
+
+        @keyframes floatUp {
+            0% { transform: translateY(0) translateX(0) rotate(0deg); opacity: 0; }
+            10% { opacity: 0.8; }
+            90% { opacity: 0.8; }
+            100% { transform: translateY(-120vh) translateX(50px) rotate(360deg); opacity: 0; }
+        }
+
+        /* --- Glossy Navigation Bar --- */
+        header { 
+            background: rgba(255, 255, 255, 0.3); 
+            backdrop-filter: blur(15px) saturate(180%);
+            -webkit-backdrop-filter: blur(15px) saturate(180%);
+            border-bottom: 2px solid rgba(255, 255, 255, 0.5);
+            padding: 15px 0; 
+            position: fixed; 
+            width: 100%; 
+            top: 0; 
+            z-index: 1000; 
+            box-shadow: 0 4px 20px rgba(0, 131, 176, 0.2);
+        }
+        nav ul { 
+            list-style: none; padding: 0; margin: 0; 
+            display: flex; justify-content: center; gap: 20px; 
+        }
+        nav ul li a { 
+            color: #042940; text-decoration: none; font-weight: 700; 
+            padding: 8px 18px; transition: all 0.4s ease;
+            border-radius: 20px;
+            border: 1px solid transparent;
+        }
+        nav ul li a:hover { 
+            background: linear-gradient(to bottom, rgba(255,255,255,0.6), rgba(255,255,255,0.1));
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            box-shadow: 0 4px 15px rgba(255,255,255,0.4);
+            color: #0083b0;
+        }
+        
+        /* --- Desain Kontainer Utama (Section) --- */
+        section { 
+            padding: 120px 20px 80px;
+            min-height: 80vh; 
+            display: flex; flex-direction: column; 
+            align-items: center; justify-content: center; 
+            text-align: center; 
+        }
+
+        /* Variasi Gradasi Latar Belakang Tiap Halaman sesuai gambar referensi */
+        #home { background: radial-gradient(circle at center, rgba(255,255,255,0.4) 0%, transparent 70%); }
+        #biodata { background: linear-gradient(180deg, rgba(0, 180, 219, 0.2), rgba(0, 242, 254, 0.2)); }
+        #skill { background: linear-gradient(180deg, rgba(0, 242, 254, 0.1), rgba(126, 213, 111, 0.3)); }
+        #portofolio { background: linear-gradient(180deg, rgba(126, 213, 111, 0.2), rgba(0, 131, 176, 0.3)); }
+        #kontak { background: radial-gradient(circle at bottom, rgba(255,255,255,0.5) 0%, transparent 80%); }
+
+        /* Efek Kartu Kaca (Glassmorphism) */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.35);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 2px solid rgba(255, 255, 255, 0.6);
+            border-radius: 24px;
+            padding: 40px;
+            box-shadow: 0 12px 40px rgba(0, 40, 80, 0.15), 
+                        inset 0 2px 4px rgba(255,255,255,0.5);
+            max-width: 700px;
+            width: 90%;
+            box-sizing: border-box;
+            transition: transform 0.3s ease;
+        }
+        .glass-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        h2.section-title { 
+            font-size: 2.6rem; margin-bottom: 25px; color: #005c8a;
+            text-shadow: 0 2px 4px rgba(255,255,255,0.8);
+            font-weight: 800;
+        }
+        
+        /* 1. Halaman Home */
+        .profile-container { position: relative; display: inline-block; }
+        .profile-img { 
+            width: 210px; height: 210px; border-radius: 50%; object-fit: cover; 
+            border: 6px solid rgba(255, 255, 255, 0.8); 
+            box-shadow: 0 8px 25px rgba(0, 131, 176, 0.4), inset 0 0 20px rgba(255,255,255,0.6);
+            background: #fff;
+        }
+        /* Efek air melingkar di luar foto profil */
+        .profile-container::before {
+            content: ''; position: absolute; top: -10px; left: -10px; right: -10px; bottom: -10px;
+            border: 3px solid rgba(0, 242, 254, 0.6); border-radius: 50%;
+            animation: spin 8s linear infinite;
+        }
+        @keyframes spin { 100% { transform: rotate(360deg); } }
+
+        .quotes { 
+            font-style: italic; color: #05445E; font-size: 1.3rem; 
+            margin: 20px auto 0; max-width: 550px; font-weight: 500;
+            text-shadow: 0 1px 2px rgba(255,255,255,0.5);
+        }
+        
+        /* 2. Halaman Biodata (Tabel Mengkilap) */
+        .biodata-table { 
+            border-collapse: collapse; width: 100%; text-align: left; 
+        }
+        .biodata-table td { 
+            padding: 16px; border-bottom: 1px solid rgba(0, 92, 138, 0.15); 
+            font-size: 1.1rem;
+        }
+        .biodata-table tr:last-child td { border: none; }
+        .biodata-table td:first-child { 
+            font-weight: bold; width: 140px; color: #005c8a;
+        }
+        
+        /* 3. Halaman Skill (Progress Bar Glossy Khas Web 2.0) */
+        .skill-container { text-align: left; }
+        .skill-name { margin-bottom: 6px; font-weight: bold; color: #005c8a; }
+        .progress-bar { 
+            background: rgba(0, 0, 0, 0.08); border-radius: 15px; 
+            margin-bottom: 20px; overflow: hidden; pading: 2px;
+            border: 1px solid rgba(255,255,255,0.4);
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .progress { 
+            background: linear-gradient(to bottom, #56ccf2, #2f80ed);
+            box-shadow: inset 0 8px 8px rgba(255,255,255,0.4), 0 2px 4px rgba(0,0,0,0.1);
+            height: 24px; text-align: right; padding-right: 15px; 
+            color: white; font-size: 0.85rem; line-height: 24px; 
+            border-radius: 15px; font-weight: bold;
+        }
+        .progress.green { background: linear-gradient(to bottom, #11998e, #38ef7d); }
+        .progress.orange { background: linear-gradient(to bottom, #ff9900, #ff5b00); }
+        
+        /* 4. Halaman Portofolio Grid */
+        .portfolio-grid { 
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); 
+            gap: 25px; width: 100%; max-width: 950px; margin: 0 auto; 
+        }
+        .portfolio-item { 
+            background: rgba(255, 255, 255, 0.4); 
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 255, 255, 0.6);
+            padding: 15px; border-radius: 20px; 
+            box-shadow: 0 8px 20px rgba(0,40,80,0.1);
+            transition: all 0.3s ease;
+        }
+        .portfolio-item:hover {
+            transform: scale(1.04);
+            box-shadow: 0 12px 25px rgba(0, 180, 219, 0.3);
+            background: rgba(255, 255, 255, 0.6);
+        }
+        .portfolio-item img { 
+            width: 100%; height: 160px; object-fit: cover; 
+            border-radius: 14px; margin-bottom: 12px; 
+            border: 1px solid rgba(255,255,255,0.5);
+        }
+        .portfolio-item h3 { margin: 10px 0 5px; color: #005c8a; }
+        .portfolio-item p { margin: 0; font-size: 0.95rem; color: #335c67; }
+        
+        /* 5. Halaman Kontak */
+        .contact-list { 
+            list-style: none; padding: 0; margin: 0; font-size: 1.15rem; text-align: left;
+        }
+        .contact-list li { margin: 18px 0; display: flex; align-items: center; }
+        .contact-list a { 
+            color: #007bb6; text-decoration: none; font-weight: bold;
+            background: rgba(255,255,255,0.4); padding: 6px 14px; border-radius: 12px;
+            border: 1px solid rgba(255,255,255,0.6); transition: 0.3s;
+            margin-left: 8px;
+        }
+        .contact-list a:hover { 
+            background: #0083b0; color: white; 
+            box-shadow: 0 4px 12px rgba(0,131,176,0.3);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="bubbles-wrapper">
+        <div class="bubble b1"></div>
+        <div class="bubble b2"></div>
+        <div class="bubble b3"></div>
+        <div class="bubble b4"></div>
+        <div class="bubble b5"></div>
+    </div>
+
+    <header>
+        <nav>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#biodata">Biodata</a></li>
+                <li><a href="#skill">Skill</a></li>
+                <li><a href="#portofolio">Portofolio</a></li>
+                <li><a href="#kontak">Kontak</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section id="home">
+        <div class="glass-card">
+            <h2 id="greeting" style="color: #0083b0; margin-bottom: 5px; font-size: 1.8rem;">Halo!</h2>
+            <div class="profile-container">
+                <img src="d:\WhatsApp Image 2026-05-19 at 13.19.22.jpeg" alt="Foto Profile Zakariyya" class="profile-img">
+            </div>
+            <h1 style="font-size: 2.8rem; margin: 15px 0 5px; color: #005c8a; text-shadow: 0 2px 4px rgba(255,255,255,0.5);">Zakariyya Perdana</h1>
+            <p style="font-weight: bold; margin: 0; color: #00b4db; letter-spacing: 1px;">FUTURE BUSINESS OWNER</p>
+            <p class="quotes">"Semuanya pasti memiliki masalah, dan semua masalah memiliki solusi"</p>
+        </div>
+    </section>
+
+    <section id="biodata">
+        <div class="glass-card">
+            <h2 class="section-title">Biodata Diri</h2>
+            <table class="biodata-table">
+                <tr>
+                    <td>Nama</td>
+                    <td>Zakariyya Perdana</td>
+                </tr>
+                <tr>
+                    <td>Umur</td>
+                    <td>17 Tahun</td>
+                </tr>
+                <tr>
+                    <td>Kelas</td>
+                    <td>XA</td> 
+                </tr>
+                <tr>
+                    <td>Jurusan</td>
+                    <td>TKJ</td> 
+                </tr>
+                <tr>
+                    <td>Hobi</td>
+                    <td>Bermain alat musik dan menggambar</td>
+                </tr>
+                <tr>
+                    <td>Cita-cita</td>
+                    <td>Memiliki bisnis</td>
+                </tr>
+            </table>
+        </div>
+    </section>
+
+    <section id="skill">
+        <div class="glass-card">
+            <h2 class="section-title">Skill & Kemampuan</h2>
+            <div class="skill-container">
+                <div class="skill-name">HTML5 & CSS3 (Web Design)</div>
+                <div class="progress-bar"><div class="progress" style="width: 85%;">85%</div></div>
+                
+                <div class="skill-name">Menggambar / Desain Kreatif</div>
+                <div class="progress-bar"><div class="progress green" style="width: 90%;">90%</div></div>
+                
+                <div class="skill-name">Bermain Musik</div>
+                <div class="progress-bar"><div class="progress" style="width: 80%;">80%</div></div>
+                
+                <div class="skill-name">Editing Video & Gambar</div>
+                <div class="progress-bar"><div class="progress green" style="width: 75%;">75%</div></div>
+
+                <div class="skill-name">Public Speaking & Gaming</div>
+                <div class="progress-bar"><div class="progress orange" style="width: 70%;">70%</div></div>
+            </div>
+        </div>
+    </section>
+
+    <section id="portofolio">
+        <h2 class="section-title" style="margin-bottom: 40px;">Portofolio & Karya</h2>
+        <div class="portfolio-grid">
+            <div class="portfolio-item">
+                <img src="d:\WhatsApp Image 2026-05-19 at 13.47.54.jpeg" alt="Hasil Tugas">
+                <h3>Hasil Tugas</h3>
+                <p>Kumpulan penugasan dan proyek akademi.</p>
+            </div>
+            <div class="portfolio-item">
+                <img src="d:\WhatsApp Image 2026-05-19 at 13.30.20.jpeg" alt="Desain">
+                <h3>Karya Desain</h3>
+                <p>Galeri hasil karya menggambar & seni digital.</p>
+            </div>
+            <div class="portfolio-item">
+                <img src="d:\WhatsApp Image 2026-05-19 at 13.33.05.jpeg" alt="Foto Kegiatan">
+                <h3>Foto Kegiatan</h3>
+                <p>Dokumentasi aktivitas produktif sehari-hari.</p>
+            </div>
+            <div class="portfolio-item">
+                <img src="d:\WhatsApp Image 2026-05-19 at 13.32.54.jpeg" alt="Project Sekolah">
+                <h3>Project Sekolah</h3>
+                <p>Karya kolaboratif lingkungan sekolah.</p>
+            </div>
+            <div class="portfolio-item">
+                <img src="d:\WhatsApp Image 2026-05-19 at 13.36.58.jpeg" alt="Sertifikat">
+                <h3>Sertifikat</h3>
+                <p>Bukti piagam penghargaan & kompetensi.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="kontak">
+        <div class="glass-card" style="max-width: 550px;">
+            <h2 class="section-title">Hubungi Saya</h2>
+            <ul class="contact-list">
+                <li>📧 Email : <a href="mailto:pplgranada9@gmail.com">pplgranada9@gmail.com</a></li>
+                <li>📸 Instagram : <a href="https://instagram.com/indigostar" target="_blank">@indigostar</a></li>
+                <li>💬 WhatsApp : <a href="https://wa.me/6283138411321" target="_blank">083138411321</a></li>
+            </ul>
+        </div>
+    </section>
+
+    <script>
+        // 1. Smooth Scrolling Efek Halus Air
+        document.querySelectorAll('nav ul li a').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // 2. Salam Real-Time Berdasarkan Jam Pengguna
+        const jam = new Date().getHours();
+        let ucapan = "Selamat Datang!";
+        
+        if (jam >= 5 && jam < 11) {
+            ucapan = "Selamat Pagi! 🌊";
+        } else if (jam >= 11 && jam < 15) {
+            ucapan = "Selamat Siang! ☀️";
+        } else if (jam >= 15 && jam < 18) {
+            ucapan = "Selamat Sore! 🌿";
+        } else {
+            ucapan = "Selamat Malam! 🌌";
+        }
+        
+        document.getElementById('greeting').innerText = ucapan;
+    </script>
+</body>
+</html>
